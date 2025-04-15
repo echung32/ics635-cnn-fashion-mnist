@@ -1,0 +1,99 @@
+vscode ➜ /workspaces/ubuntu (main) $ /usr/bin/python3 /workspaces/ubuntu/assignment4.py
+Using device: cpu
+Shape of dataset: torch.Size([60000, 28, 28])
+Labels in the dataset: ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+Number of training samples: 60000
+Number of test samples: 10000
+Number of training samples after split: 50000
+Number of validation samples after split: 10000
+Baseline Model:
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1           [-1, 32, 28, 28]             320
+              ReLU-2           [-1, 32, 28, 28]               0
+         MaxPool2d-3           [-1, 32, 14, 14]               0
+            Conv2d-4           [-1, 64, 14, 14]          18,496
+              ReLU-5           [-1, 64, 14, 14]               0
+         MaxPool2d-6             [-1, 64, 7, 7]               0
+            Linear-7                  [-1, 128]         401,536
+              ReLU-8                  [-1, 128]               0
+            Linear-9                   [-1, 10]           1,290
+================================================================
+Total params: 421,642
+Trainable params: 421,642
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 0.65
+Params size (MB): 1.61
+Estimated Total Size (MB): 2.26
+----------------------------------------------------------------
+Improved Model:
+----------------------------------------------------------------
+        Layer (type)               Output Shape         Param #
+================================================================
+            Conv2d-1           [-1, 32, 28, 28]             320
+       BatchNorm2d-2           [-1, 32, 28, 28]              64
+              ReLU-3           [-1, 32, 28, 28]               0
+         MaxPool2d-4           [-1, 32, 14, 14]               0
+           Dropout-5           [-1, 32, 14, 14]               0
+            Conv2d-6           [-1, 64, 14, 14]          18,496
+       BatchNorm2d-7           [-1, 64, 14, 14]             128
+              ReLU-8           [-1, 64, 14, 14]               0
+         MaxPool2d-9             [-1, 64, 7, 7]               0
+          Dropout-10             [-1, 64, 7, 7]               0
+           Linear-11                  [-1, 128]         401,536
+             ReLU-12                  [-1, 128]               0
+          Dropout-13                  [-1, 128]               0
+           Linear-14                   [-1, 10]           1,290
+================================================================
+Total params: 421,834
+Trainable params: 421,834
+Non-trainable params: 0
+----------------------------------------------------------------
+Input size (MB): 0.00
+Forward/backward pass size (MB): 1.01
+Params size (MB): 1.61
+Estimated Total Size (MB): 2.62
+----------------------------------------------------------------
+Training Baseline CNN Model...
+Epoch 1/15: Training Loss: 0.4790, Validation Loss: 0.3716
+Epoch 2/15: Training Loss: 0.3102, Validation Loss: 0.2940
+Epoch 3/15: Training Loss: 0.2612, Validation Loss: 0.2740
+Epoch 4/15: Training Loss: 0.2324, Validation Loss: 0.2474
+Epoch 5/15: Training Loss: 0.2042, Validation Loss: 0.2372
+Epoch 6/15: Training Loss: 0.1827, Validation Loss: 0.2516
+Epoch 7/15: Training Loss: 0.1647, Validation Loss: 0.2216
+Epoch 8/15: Training Loss: 0.1464, Validation Loss: 0.2303
+Epoch 9/15: Training Loss: 0.1285, Validation Loss: 0.2194
+Epoch 10/15: Training Loss: 0.1114, Validation Loss: 0.2409
+Epoch 11/15: Training Loss: 0.0970, Validation Loss: 0.2626
+Epoch 12/15: Training Loss: 0.0857, Validation Loss: 0.2590
+Epoch 13/15: Training Loss: 0.0725, Validation Loss: 0.2696
+Epoch 14/15: Training Loss: 0.0636, Validation Loss: 0.2698
+Epoch 15/15: Training Loss: 0.0551, Validation Loss: 0.2837
+Authorization required, but no authorization protocol specified
+Baseline Model Loss Curves saved as 'baseline_loss_curves.png'
+Baseline Test Accuracy: 91.55%
+Confusion matrix saved as 'baseline_confusion_matrix.png'
+
+Training Improved CNN Model with Dropout and Batch Normalization...
+Epoch 1/15: Training Loss: 0.5017, Validation Loss: 0.3389
+Epoch 2/15: Training Loss: 0.3598, Validation Loss: 0.2954
+Epoch 3/15: Training Loss: 0.3188, Validation Loss: 0.2773
+Epoch 4/15: Training Loss: 0.2970, Validation Loss: 0.2542
+Epoch 5/15: Training Loss: 0.2814, Validation Loss: 0.2680
+Epoch 6/15: Training Loss: 0.2649, Validation Loss: 0.2357
+Epoch 7/15: Training Loss: 0.2508, Validation Loss: 0.2312
+Epoch 8/15: Training Loss: 0.2420, Validation Loss: 0.2239
+Epoch 9/15: Training Loss: 0.2365, Validation Loss: 0.2296
+Epoch 10/15: Training Loss: 0.2245, Validation Loss: 0.2186
+Epoch 11/15: Training Loss: 0.2231, Validation Loss: 0.2227
+Epoch 12/15: Training Loss: 0.2162, Validation Loss: 0.2147
+Epoch 13/15: Training Loss: 0.2098, Validation Loss: 0.2177
+Epoch 14/15: Training Loss: 0.2047, Validation Loss: 0.2137
+Epoch 15/15: Training Loss: 0.2029, Validation Loss: 0.2019
+Improved Model Loss Curves saved as 'improved_loss_curves.png'
+Improved Model Test Accuracy: 92.07%
+Confusion matrix saved as 'improved_confusion_matrix.png'
